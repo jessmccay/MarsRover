@@ -13,7 +13,21 @@ public class Rover {
         return xCordinate + " " + yCoordinate + " " + direction;
     }
 
-
+    public void commands(String nasaCommands) {
+       char[] nasaCommandsArray = nasaCommands.toCharArray();
+        for (int i = 0; i < nasaCommandsArray.length; i++) {
+            if (nasaCommandsArray[i] == 'L') {
+                turnLeft();
+            }
+           if (nasaCommandsArray[i] == 'R') {
+               turnRight();
+           }
+           if (nasaCommandsArray[i] == 'M') {
+               driveForward();
+           }
+            //Process char
+        }
+    }
     public enum Direction {
          N, E, S, W
      }
@@ -50,8 +64,17 @@ public class Rover {
 
 
     public void driveForward() {
-        if (direction == "N") {
+        if (this.direction == "N") {
             yCoordinate = (yCoordinate + 1);
+        }
+        if (this.direction == "S"){
+            yCoordinate = yCoordinate - 1;
+        }
+        if (this.direction == "W"){
+            xCordinate = xCordinate - 1;
+        }
+        if (this.direction == "E"){
+            xCordinate = xCordinate + 1;
         }
     }
 //        else if (direction == "E") {
