@@ -13,39 +13,51 @@ public class Rover {
         return xCordinate + " " + yCoordinate + " " + direction;
     }
 
-    public void commands(String nasaCommands) {
+    public String commands(String nasaCommands) {
        char[] nasaCommandsArray = nasaCommands.toCharArray();
         for (int i = 0; i < nasaCommandsArray.length; i++) {
             if (nasaCommandsArray[i] == 'L') {
                 turnLeft();
             }
-           if (nasaCommandsArray[i] == 'R') {
+            if (nasaCommandsArray[i] == 'R') {
                turnRight();
-           }
-           if (nasaCommandsArray[i] == 'M') {
+            }
+            if (nasaCommandsArray[i] == 'M') {
                driveForward();
-           }
-            //Process char
+            }
         }
+        return currentPosition();
     }
-    public enum Direction {
-         N, E, S, W
-     }
 
     public void turnRight() {
-        if (this.direction == "N"){
-          direction = "E";
-        }
-        else if (direction == "E"){
-           direction = "S";
-        }
-        else if(direction == "S"){
-           direction = "W";
-        }
-        else if (direction == "W"){
-           direction = "N";
-        }
+
+      switch(direction) {
+          case "N":
+              direction = "E";
+              break;
+          case "E":
+              direction = "S";
+              break;
+          case "S":
+              direction = "W";
+              break;
+          case "W":
+              direction = "N";
+              break;
+      }
     }
+//    }   if (this.direction == "N"){
+//        direction = "E";
+//    }
+//        else if (direction == "E"){
+//        direction = "S";
+//    }
+//        else if(direction == "S"){
+//        direction = "W";
+//    }
+//        else if (direction == "W"){
+//        direction = "N";
+//    }
 
     public void turnLeft() {
         if (this.direction == "N"){
@@ -62,7 +74,6 @@ public class Rover {
         }
     }
 
-
     public void driveForward() {
         if (this.direction == "N") {
             yCoordinate = (yCoordinate + 1);
@@ -77,18 +88,14 @@ public class Rover {
             xCordinate = xCordinate + 1;
         }
     }
-//        else if (direction == "E") {
-//            currentPosition = (xCordinate + 1) + " " + yCoordinate + " " + direction;
-//            return currentPosition;
-//        }
-//        else if (direction == "S") {
-//            currentPosition = xCordinate + " " + (yCoordinate - 1) + " " + direction;
-//            return currentPosition;
-//        }
-//        else if (direction == "W") {
-//            currentPosition = (xCordinate - 1) + " " + yCoordinate + " " + direction;
-//            return currentPosition;
-//        }
-//        return currentPosition;
-//    }
+
+    public static void main(String [ ] args)
+    {
+        Rover rover1 = new Rover(1,2,"N");
+        rover1.commands("LMLMLMLMM");
+
+        Rover rover2 = new Rover(3, 3, "E");
+        rover2.commands("MMRMMRMRRM");
+    }
+
 }
